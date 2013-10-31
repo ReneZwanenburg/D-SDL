@@ -27,9 +27,9 @@ struct Window
 			return SDL_GetWindowTitle(window).cStringToString();
 		}
 		
-		auto displayModes()
+		void displayMode(SDL_DisplayMode mode)
 		{
-			return getDisplayModes(CanFail!SDL_GetWindowDisplayIndex(window));
+			CanFail!SDL_SetWindowDisplayMode(window, &mode);
 		}
 		
 		auto displayMode()
@@ -37,6 +37,96 @@ struct Window
 			SDL_DisplayMode mode;
 			CanFail!SDL_GetWindowDisplayMode(window, &mode);
 			return mode;
+		}
+		
+		auto displayModes()
+		{
+			return getDisplayModes(CanFail!SDL_GetWindowDisplayIndex(window));
+		}
+		
+		void size(SDL_Point size)
+		{
+			SDL_SetWindowSize(window, size.x, size.y);
+		}
+		
+		auto size()
+		{
+			SDL_Point size;
+			SDL_GetWindowSize(window, &size.x, &size.y);
+			return size;
+		}
+		
+		void position(SDL_Point point)
+		{
+			SDL_SetWindowPosition(window, point.x, point.y);
+		}
+		
+		auto position()
+		{
+			SDL_Point position;
+			SDL_GetWindowPosition(window, &position.x, &position.y);
+			return position;
+		}
+		
+		void maximumSize(SDL_Point size)
+		{
+			SDL_SetWindowMaximumSize(window, size.x, size.y);
+		}
+		
+		auto maximumSize()
+		{
+			SDL_Point point;
+			SDL_GetWindowMaximumSize(window, &point.x, &point.y);
+			return point;
+		}
+		
+		void minimumSize(SDL_Point size)
+		{
+			SDL_SetWindowMinimumSize(window, size.x, size.y);
+		}
+		
+		auto minimumSize()
+		{
+			SDL_Point size;
+			SDL_GetWindowMinimumSize(window, &size.x, &size.y);
+			return size;
+		}
+		
+		void visible(bool visible)
+		{
+			if(visible)
+			{
+				SDL_ShowWindow(window);
+			}
+			else
+			{
+				SDL_HideWindow(window);
+			}
+		}
+		
+		bool visible()
+		{
+			return !!(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN);
+		}
+		
+		void fullscreen(bool fullscreen)
+		{
+			SDL_SetWindowFullscreen(window, fullscreen ? SDL_WINDOW_FULLSCREEN : 0u);
+		}
+		
+		bool fullscreen()
+		{
+			return !!(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN);
+		}
+		
+		void grab(bool grab)
+		{
+			SDL_SetWindowGrab(window, grab);
+		}
+		
+		bool grab()
+		{
+			return SDL_GetWindowGrab(window);
 		}
 	}
 	

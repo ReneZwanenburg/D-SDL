@@ -16,5 +16,14 @@ void main()
 	
 	writeln("Mode: ", window.displayMode);
 	
-	//Thread.sleep(2000.msecs);
+	Thread.sleep(2000.msecs);
+	
+	window.visible = false;
+	
+	Thread.sleep(2000.msecs);
+	
+	window.visible = true;
+	window.fullscreen = true;
+	
+	Thread.sleep(2000.msecs);
 }
