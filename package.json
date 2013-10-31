@@ -1,0 +1,15 @@
+﻿{
+	"name": "dsdl",
+	"description": "SDL2 wrapper with an idiomatic D API",
+	
+	"copyright": "Copyright © 2013, René Zwanenburg",
+	"license": "Boost",
+	
+	"authors": [
+		"René Zwanenburg"
+	],
+	
+	"dependencies": {
+		"derelict:sdl2": "~master"
+	}
+}
